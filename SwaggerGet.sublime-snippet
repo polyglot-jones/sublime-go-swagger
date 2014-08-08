@@ -1,0 +1,26 @@
+<snippet>
+   <description>Get Controller with Swagger Annotations</description>
+	<content><![CDATA[
+// @Description Get a specific ${1:resource}
+// @Title get${1/(.*)/\u\1/}
+// @Accept  json
+// @Param   id path string true "${1/(.*)/\u\1/} id"
+// @Success 200 {object} string
+// @Failure 500 {object} ServerError "No such ${1} id"
+// @Router /${1}/{id} [get]
+func get${1/(.*)/\u\1/}(params martini.Params, res server.Respond) {
+	// Register this method in createServer() as follows:
+	// s.Get("/${1}/:id", get${1/(.*)/\u\1/})
+
+	${1}, err := services.Get${1/(.*)/\u\1/}(params["id"])
+	if err != nil {
+		res.Error(err)
+		return
+	}
+
+	res.Ok(${1})
+}
+]]></content>
+	<tabTrigger>swget</tabTrigger>
+	<scope>source.go</scope>
+</snippet>

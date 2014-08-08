@@ -1,0 +1,14 @@
+<snippet>
+   <description>Swagger Main Annotations</description>
+	<content><![CDATA[
+// @APIVersion  0.0.1
+// @Title       ${1:title for the API as a whole}
+// @Description ${1}
+// @Contact     info@veritone.com
+
+// @SubApi ${2:title for the portion of the api that begins with /foo} [/foo]
+// @SubApi ${3:title for the portion of the api that begins with /bar} [/bar]
+]]></content>
+	<tabTrigger>swm</tabTrigger>
+	<scope>source.go</scope>
+</snippet>

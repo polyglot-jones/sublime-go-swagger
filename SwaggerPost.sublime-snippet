@@ -1,0 +1,27 @@
+<snippet>
+   <description>Create (Post) Controller with Swagger Annotations</description>
+	<content><![CDATA[
+// @Description Create a ${1:resource}
+// @Title create${1/(.*)/\u\1/}
+// @Accept  json
+// @Success 200 {object} string
+// @Failure 500 {object} ServerError "Invalid data"
+// @Router /${1} [post]
+func create${1/(.*)/\u\1/}(req *http.Request, params martini.Params, res server.Respond, ${1} models.${1/(.*)/\u\1/}) {
+	// Register this method in createServer() as follows:
+	// s.Post("/${1}", server.Bind(models.${1/(.*)/\u\1/}{}), create${1/(.*)/\u\1/})
+
+	fmt.Printf("%+v\n", ${1})
+
+	err := services.Create${1/(.*)/\u\1/}(&${1})
+	if err != nil {
+		res.Error(err)
+		return
+	}
+
+	res.OkNoContent()
+}
+]]></content>
+	<tabTrigger>swpost</tabTrigger>
+	<scope>source.go</scope>
+</snippet>

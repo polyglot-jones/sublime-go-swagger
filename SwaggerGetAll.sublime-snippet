@@ -1,0 +1,25 @@
+<snippet>
+   <description>Get-All Controller with Swagger Annotations</description>
+	<content><![CDATA[
+// @Description List of all ${1:resource}s
+// @Title get${1/(.*)/\u\1/}s
+// @Accept  json
+// @Success 200 {object} string
+// @Failure 500 {object} ServerError "??? Can this fail? Not authorized?"
+// @Router /${1}s [get]
+func get${1/(.*)/\u\1/}s(params martini.Params, res server.Respond) {
+	// Register this method in createServer() as follows:
+	// s.Get("/${1}s", get${1/(.*)/\u\1/}s)
+
+	${1}s, err := services.Get${1/(.*)/\u\1/}s()
+	if err != nil {
+		res.Error(err)
+		return
+	}
+
+	res.Ok(${1}s)
+}
+]]></content>
+	<tabTrigger>swgetall</tabTrigger>
+	<scope>source.go</scope>
+</snippet>
