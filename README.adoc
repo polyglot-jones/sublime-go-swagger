@@ -1,0 +1,7 @@
+sublime-go-swagger
+==================
+
+Sublime plugin for GoLang REST code with Swagger annotations
+
+This is a first cut at some snippets to write standard REST controller code with Swagger annotations.
+
