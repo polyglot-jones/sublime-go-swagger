@@ -1,0 +1,19 @@
+<snippet>
+   <description>Get-All Service Worker</description>
+	<content><![CDATA[
+// Service method to actually get a list of all ${1:resource}s
+func Get${1/(.*)/\u\1/}s(*models.${1/(.*)/\u\1/}QueryResponse, error) {
+
+	${1}1 := nil
+	${1}2 := nil
+	${1}s := &models.${1/(.*)/\u\1/}QueryResponse{
+		TotalRecords: 2,
+		Records:      []*models.${1/(.*)/\u\1/}{${1}1, ${1}2},
+	}
+
+	return ${1}s, nil
+}
+]]></content>
+	<tabTrigger>svcgetall</tabTrigger>
+	<scope>source.go</scope>
+</snippet>

@@ -1,0 +1,12 @@
+<snippet>
+   <description>Delete Service Worker</description>
+	<content><![CDATA[
+// Service method to (soft)delete a ${1:resource}
+func Delete${1/(.*)/\u\1/}(params *models.Params) {
+
+	return nil
+}
+]]></content>
+	<tabTrigger>svcdel</tabTrigger>
+	<scope>source.go</scope>
+</snippet>

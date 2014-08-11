@@ -1,0 +1,12 @@
+<snippet>
+   <description>Put (Update) Service Worker</description>
+	<content><![CDATA[
+// Service method to update (put) a ${1:resource}
+func Update${1/(.*)/\u\1/}(${1} *models.${1/(.*)/\u\1/}) error {
+
+	return nil
+}
+]]></content>
+	<tabTrigger>svcput</tabTrigger>
+	<scope>source.go</scope>
+</snippet>

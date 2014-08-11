@@ -1,0 +1,12 @@
+<snippet>
+   <description>Post (Create) Service Worker</description>
+	<content><![CDATA[
+// Service method to create (post) a ${1:resource}
+func Create${1/(.*)/\u\1/}(${1} *models.${1/(.*)/\u\1/}) error {
+
+	return nil
+}
+]]></content>
+	<tabTrigger>svcpost</tabTrigger>
+	<scope>source.go</scope>
+</snippet>
