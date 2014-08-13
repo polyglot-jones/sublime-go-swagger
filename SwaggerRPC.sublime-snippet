@@ -1,0 +1,32 @@
+<snippet>
+   <description>Remote procedure call (RPC) Controller with Swagger Annotations</description>
+	<content><![CDATA[
+// @Description Call the ${1:procname} remote procedure against the ${2:resource} resource.
+// @Title rpc${1/(.*)/\u\1/}
+// @Accept  json
+// @Success 200 {object} string
+// @Success 204 {object} string "No content"
+// @Failure 400 {object} ServerError "Bad request"
+// @Failure 401 {object} ServerError "Not authenticated"
+// @Failure 403 {object} ServerError "Forbidden"
+// @Failure 404 {object} ServerError "No such ID"
+// @Resource /${2}
+// @Router /rpc/${1} [post]
+func rpc${1/(.*)/\u\1/}(req *http.Request, params martini.Params, res server.Respond, ${1} models.${1/(.*)/\u\1/}) {
+	// Register this method in createServer() as follows:
+	// s.Post("/rpc/${1}", server.Bind(models.${2/(.*)/\u\1/}{}), rpc${1/(.*)/\u\1/})
+
+	fmt.Printf("%+v\n", ${1})
+
+	err := services.Rpc${1/(.*)/\u\1/}(&${1})
+	if err != nil {
+		res.Error(err)
+		return
+	}
+
+	res.OkNoContent()
+}
+]]></content>
+	<tabTrigger>swpost</tabTrigger>
+	<scope>source.go</scope>
+</snippet>
