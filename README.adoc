@@ -1,7 +1,22 @@
 sublime-go-swagger
 ==================
 
-Sublime plugin for GoLang REST code with Swagger annotations
+A Sublime plugin for easily generating GoLang REST code (with Swagger annotations).
 
 This is a first cut at some snippets to write standard REST controller code with Swagger annotations.
+
+== Usage
+
+The SwaggerXxxx snippets are all designed with numerous placeholders that are all linked together, such that typing something into the first one automatically fills all of them. Some of them automatically capitalize the first letter, and the rest remain lower case. Also, some of them automatically append an "s" to make it plural, and some remain singular.
+
+. Invoke the snippet (e.g. by typing swgetall and hitting Enter).
+. Type in the resource name (e.g. account) using lower-case letters.
+. Hit the Tab key.
+
+
+== Related Projects
+
+* https://github.com/DisposaBoy/GoSublime
+* https://github.com/yvasiyarov/swagger
+* https://github.com/wordnik/swagger-ui
 
