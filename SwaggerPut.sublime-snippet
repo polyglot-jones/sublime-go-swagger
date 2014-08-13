@@ -1,12 +1,15 @@
 <snippet>
    <description>Update (Put) Controller with Swagger Annotations</description>
 	<content><![CDATA[
-// @Description Update a ${1:resource}
+// @Description Update a ${1:resource}. Note: Any ID passed in the JSON will be ignored. Returns the same JSON with updated IDs/values.
 // @Title update${1/(.*)/\u\1/}
 // @Accept  json
 // @Param   id path string true "${1/(.*)/\u\1/} id"
-// @Success 200 {object} string
-// @Failure 500 {object} ServerError "No such ${1} id"
+// @Success 200 {object} models.${1/(.*)/\u\1/}
+// @Failure 400 {object} ServerError "Bad request"
+// @Failure 401 {object} ServerError "Not authenticated"
+// @Failure 403 {object} ServerError "Forbidden"
+// @Failure 404 {object} ServerError "No such ${1} ID"
 // @Router /${1}/{id} [put]
 func update${1/(.*)/\u\1/}(req *http.Request, params martini.Params, res server.Respond, ${1} models.${1/(.*)/\u\1/}) {
 	// Register this method in createServer() as follows:

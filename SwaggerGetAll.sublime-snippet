@@ -3,15 +3,19 @@
 	<content><![CDATA[
 // @Description List of all ${1:resource}s
 // @Title get${1/(.*)/\u\1/}s
-// @Accept  json
-// @Success 200 {object} string
-// @Failure 500 {object} ServerError "??? Can this fail? Not authorized?"
+// @Success 200 {array} models.${1/(.*)/\u\1/}
+// @Success 204 {object} string "No content"
+// @Failure 401 {object} ServerError "Not authenticated"
+// @Failure 403 {object} ServerError "Forbidden"
+// @Failure 404 {object} ServerError "No such ID"
+// @Resource /${1}
 // @Router /${1}s [get]
 func get${1/(.*)/\u\1/}s(params martini.Params, res server.Respond) {
 	// Register this method in createServer() as follows:
 	// s.Get("/${1}s", get${1/(.*)/\u\1/}s)
 
-	${1}s, err := services.Get${1/(.*)/\u\1/}s()
+	params := parseQuery(mParams)
+	${1}s, err := services.Get${1/(.*)/\u\1/}s(params)
 	if err != nil {
 		res.Error(err)
 		return

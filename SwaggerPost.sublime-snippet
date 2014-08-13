@@ -1,11 +1,13 @@
 <snippet>
    <description>Create (Post) Controller with Swagger Annotations</description>
 	<content><![CDATA[
-// @Description Create a ${1:resource}
+// @Description Create a ${1:resource}. Note: Any ID passed in the JSON will be ignored. Returns the same JSON with updated IDs/values.
 // @Title create${1/(.*)/\u\1/}
 // @Accept  json
-// @Success 200 {object} string
-// @Failure 500 {object} ServerError "Invalid data"
+// @Success 200 {object} models.${1/(.*)/\u\1/}
+// @Failure 400 {object} ServerError "Bad request"
+// @Failure 401 {object} ServerError "Not authenticated"
+// @Failure 403 {object} ServerError "Forbidden"
 // @Router /${1} [post]
 func create${1/(.*)/\u\1/}(req *http.Request, params martini.Params, res server.Respond, ${1} models.${1/(.*)/\u\1/}) {
 	// Register this method in createServer() as follows:
