@@ -1,8 +1,8 @@
 <snippet>
    <description>Post (Create) Service Worker</description>
 	<content><![CDATA[
-// Service method to create (post) a ${1:resource}
-func Create${1/(.*)/\u\1/}(${1} *models.${1/(.*)/\u\1/}) error {
+// Create${1/(.*)/\u\1/} is the delegate that actually creates (posts) a ${1:resource}
+func Create${1/(.*)/\u\1/}(${1} *${1/(.*)/\u\1/}, backend ${1/(.*)/\u\1/}Backend) error {
 
 	return nil
 }

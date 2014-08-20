@@ -1,0 +1,3 @@
+[
+	{ "keys": ["ctrl+j", "ctrl+r"], "command": "swagger_router_convert" },
+]

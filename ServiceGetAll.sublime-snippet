@@ -1,15 +1,22 @@
 <snippet>
    <description>Get-All Service Worker</description>
 	<content><![CDATA[
-// Service method to actually get a list of all ${1:resource}s
-func Get${1/(.*)/\u\1/}s(*models.${1/(.*)/\u\1/}QueryResponse, error) {
+// Get${1/(.*)/\u\1/}s is the delegate that actually gets a list of all ${1:resource}s
+func Get${1/(.*)/\u\1/}s(params *Params, backend ${1/(.*)/\u\1/}Backend) (*${1/(.*)/\u\1/}QueryResponse, error) {
 
+	// Temporary stub
 	${1}1 := nil
 	${1}2 := nil
-	${1}s := &models.${1/(.*)/\u\1/}QueryResponse{
+	${1}s := &${1/(.*)/\u\1/}QueryResponse{
 		TotalRecords: 2,
-		Records:      []*models.${1/(.*)/\u\1/}{${1}1, ${1}2},
+		Records:      []*${1/(.*)/\u\1/}{${1}1, ${1}2},
 	}
+
+	// Actual call to backend
+	// ${1}s, err := backend.Get${1/(.*)/\u\1/}s(params)
+	// if err != nil {
+	//     return nil, err
+	// }
 
 	return ${1}s, nil
 }

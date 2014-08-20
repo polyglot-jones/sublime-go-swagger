@@ -1,0 +1,30 @@
+<snippet>
+   <description>Get-All-By Controller with Swagger Annotations</description>
+	<content><![CDATA[
+// @Title get${1/(.*)/\u\1/}sBy${2/(.*)/\u\1/}
+// @Description List of all ${1:resource}s of a certain ${2:target_resource}
+// @Param   ${2}Id path string true "${2/(.*)/\u\1/} id"
+// @Success 200 {array} ${1/(.*)/\u\1/}
+// @Success 204 {object} string "No content"
+// @Failure 401 {object} error "Not authenticated"
+// @Failure 403 {object} error "Forbidden"
+// @Failure 404 {object} error "No such ${2} ID"
+// @Resource /${1}
+// @Router /${2}/{${2}Id}/${1}s [get]
+func get${1/(.*)/\u\1/}sBy${2/(.*)/\u\1/}(mParams martini.Params, res server.Respond, backend ${1/(.*)/\u\1/}Backend) {
+	// Register this method in createServer() as follows:
+	// s.Get("/${2}/:${2}Id/${1}s", get${1/(.*)/\u\1/}sBy${2/(.*)/\u\1/})
+
+	params := parseQuery(mParams)
+	${1}s, err := Get${1/(.*)/\u\1/}sBy${2/(.*)/\u\1/}(params, backend)
+	if err != nil {
+		res.Error(err)
+		return
+	}
+
+	res.Ok(${1}s)
+}
+]]></content>
+	<tabTrigger>swgetallby</tabTrigger>
+	<scope>source.go</scope>
+</snippet>

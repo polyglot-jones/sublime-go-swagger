@@ -1,0 +1,9 @@
+<snippet>
+   <description>Swagger Router Annotation</description>
+	<content><![CDATA[
+// @router /${6:rest_path}/{${2:parameter}} [get|post|delete|put]
+// (move this line next to the controller)
+]]></content>
+	<tabTrigger>swr</tabTrigger>
+	<scope>source.go</scope>
+</snippet>

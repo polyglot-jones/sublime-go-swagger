@@ -1,21 +1,21 @@
 <snippet>
    <description>Get-All Controller with Swagger Annotations</description>
 	<content><![CDATA[
-// @Description List of all ${1:resource}s
 // @Title get${1/(.*)/\u\1/}s
-// @Success 200 {array} models.${1/(.*)/\u\1/}
+// @Description List of all ${1:resource}s
+// @Success 200 {array} ${1/(.*)/\u\1/}
 // @Success 204 {object} string "No content"
-// @Failure 401 {object} ServerError "Not authenticated"
-// @Failure 403 {object} ServerError "Forbidden"
-// @Failure 404 {object} ServerError "No such ID"
+// @Failure 401 {object} error "Not authenticated"
+// @Failure 403 {object} error "Forbidden"
+// @Failure 404 {object} error "No such ID"
 // @Resource /${1}
 // @Router /${1}s [get]
-func get${1/(.*)/\u\1/}s(params martini.Params, res server.Respond) {
+func get${1/(.*)/\u\1/}s(mParams martini.Params, res server.Respond, backend ${1/(.*)/\u\1/}Backend) {
 	// Register this method in createServer() as follows:
 	// s.Get("/${1}s", get${1/(.*)/\u\1/}s)
 
 	params := parseQuery(mParams)
-	${1}s, err := services.Get${1/(.*)/\u\1/}s(params)
+	${1}s, err := Get${1/(.*)/\u\1/}s(params, backend)
 	if err != nil {
 		res.Error(err)
 		return

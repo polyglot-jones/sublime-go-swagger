@@ -1,20 +1,20 @@
 <snippet>
    <description>Delete Controller with Swagger Annotations</description>
 	<content><![CDATA[
-// @Description (Soft)Delete a ${1:resource}
 // @Title delete${1/(.*)/\u\1/}
+// @Description (Soft)Delete a ${1:resource}
 // @Param   id path string true "${1/(.*)/\u\1/} id"
 // @Success 204 {object} string "No content"
-// @Failure 400 {object} ServerError "Bad request"
-// @Failure 401 {object} ServerError "Not authenticated"
-// @Failure 403 {object} ServerError "Forbidden"
-// @Failure 404 {object} ServerError "No such ${1} ID"
+// @Failure 400 {object} error "Bad request"
+// @Failure 401 {object} error "Not authenticated"
+// @Failure 403 {object} error "Forbidden"
+// @Failure 404 {object} error "No such ${1} ID"
 // @Router /${1}/{id} [delete]
-func delete${1/(.*)/\u\1/}(params martini.Params, res server.Respond) {
+func delete${1/(.*)/\u\1/}(mParams martini.Params, res server.Respond, backend ${1/(.*)/\u\1/}Backend) {
 	// Register this method in createServer() as follows:
 	// s.Delete("/${1}/:id", delete${1/(.*)/\u\1/})
 
-	err := services.Delete${1/(.*)/\u\1/}(params["id"])
+	err := Delete${1/(.*)/\u\1/}(params["id"], backend)
 	if err != nil {
 		res.Error(err)
 		return

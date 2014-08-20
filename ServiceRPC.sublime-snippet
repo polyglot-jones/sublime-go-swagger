@@ -1,0 +1,12 @@
+<snippet>
+   <description>Remote procedure call (RPC) Service Worker</description>
+	<content><![CDATA[
+// Rpc${1/(.*)/\u\1/} is the delegate that actually makes a the ${1:rpc_name} remote procedure call involving a ${2:resource} resource
+func Rpc${1/(.*)/\u\1/}(${1} *${2/(.*)/\u\1/}, backend ${1/(.*)/\u\1/}Backend) error {
+
+	return nil
+}
+]]></content>
+	<tabTrigger>svcrpc</tabTrigger>
+	<scope>source.go</scope>
+</snippet>

@@ -1,8 +1,8 @@
 <snippet>
    <description>Delete Service Worker</description>
 	<content><![CDATA[
-// Service method to (soft)delete a ${1:resource}
-func Delete${1/(.*)/\u\1/}(params *models.Params) {
+// Delete${1/(.*)/\u\1/} is the delegate that actually (soft)deletes a ${1:resource}
+func Delete${1/(.*)/\u\1/}(params *models.Params, backend ${1/(.*)/\u\1/}Backend) {
 
 	return nil
 }
