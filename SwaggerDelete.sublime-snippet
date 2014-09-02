@@ -3,24 +3,19 @@
 	<content><![CDATA[
 // @Title delete${1/(.*)/\u\1/}
 // @Description (Soft)Delete a ${1:resource}
-// @Param   id path string true "${1/(.*)/\u\1/} id"
+// @Param   ${1}Id path string true "${1/(.*)/\u\1/} id"
 // @Success 204 {object} string "No content"
 // @Failure 400 {object} error "Bad request"
 // @Failure 401 {object} error "Not authenticated"
 // @Failure 403 {object} error "Forbidden"
 // @Failure 404 {object} error "No such ${1} ID"
-// @Router /${1}/{id} [delete]
+// @Router /${1}/{${1}Id} [delete]
 func delete${1/(.*)/\u\1/}(mParams martini.Params, res server.Respond, backend ${1/(.*)/\u\1/}Backend) {
 	// Register this method in createServer() as follows:
-	// s.Delete("/${1}/:id", delete${1/(.*)/\u\1/})
+	// s.Delete("/${1}/:${1}Id", delete${1/(.*)/\u\1/})
 
 	err := Delete${1/(.*)/\u\1/}(params["id"], backend)
-	if err != nil {
-		res.Error(err)
-		return
-	}
-
-	res.OkNoContent()
+	res.Automatic(nil, err)
 }
 ]]></content>
 	<tabTrigger>swdel</tabTrigger>

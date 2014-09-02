@@ -16,15 +16,8 @@ func rpc${1/(.*)/\u\1/}(req *http.Request, params martini.Params, res server.Res
 	// Register this method in createServer() as follows:
 	// s.Post("/rpc/${1}", server.Bind(${2/(.*)/\u\1/}{}), rpc${1/(.*)/\u\1/})
 
-	fmt.Printf("%+v\n", ${1})
-
 	err := Rpc${1/(.*)/\u\1/}(&${1}, backend)
-	if err != nil {
-		res.Error(err)
-		return
-	}
-
-	res.OkNoContent()
+	res.Automatic(nil, err)
 }
 ]]></content>
 	<tabTrigger>swpost</tabTrigger>

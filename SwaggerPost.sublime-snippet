@@ -2,7 +2,7 @@
    <description>Create (Post) Controller with Swagger Annotations</description>
 	<content><![CDATA[
 // @Title create${1/(.*)/\u\1/}
-// @Description Create a ${1:resource}. Note: Any ID passed in the JSON will be ignored. Returns the same JSON with updated IDs/values.
+// @Description Create a ${1:resource}.
 // @Accept  application/json
 // @Success 200 {object} ${1/(.*)/\u\1/}
 // @Failure 400 {object} error "Bad request"
@@ -13,15 +13,8 @@ func create${1/(.*)/\u\1/}(req *http.Request, mParams martini.Params, res server
 	// Register this method in createServer() as follows:
 	// s.Post("/${1}", server.Bind(${1/(.*)/\u\1/}{}), create${1/(.*)/\u\1/})
 
-	fmt.Printf("%+v\n", ${1})
-
 	err := Create${1/(.*)/\u\1/}(&${1}, backend)
-	if err != nil {
-		res.Error(err)
-		return
-	}
-
-	res.OkNoContent()
+	res.Automatic(nil, err)
 }
 ]]></content>
 	<tabTrigger>swpost</tabTrigger>

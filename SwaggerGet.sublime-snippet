@@ -3,25 +3,20 @@
 	<content><![CDATA[
 // @Title get${1/(.*)/\u\1/}
 // @Description Get a specific ${1:resource}
-// @Param   id path string true "${1/(.*)/\u\1/} id"
-// @Success 200 {object} ${1/(.*)/\u\1/}
+// @Param   ${1}Id path string true "${1/(.*)/\u\1/} id"
+// @Success 200 {object} model.${1/(.*)/\u\1/}
 // @Failure 400 {object} error "Bad request"
 // @Failure 401 {object} error "Not authenticated"
 // @Failure 403 {object} error "Forbidden"
-// @Failure 404 {object} error "No such ${1} ID"
-// @Router /${1}/{id} [get]
+// @Failure 404 {object} error "No such ${1} Id"
+// @Router /${1}/{${1}Id} [get]
 func get${1/(.*)/\u\1/}(mParams martini.Params, res server.Respond, backend ${1/(.*)/\u\1/}Backend) {
 	// Register this method in createServer() as follows:
-	// s.Get("/${1}/:id", get${1/(.*)/\u\1/})
+	// s.Get("/${1}/:${1}Id", get${1/(.*)/\u\1/})
 
 	params := parseQuery(mParams)
 	${1}, err := Get${1/(.*)/\u\1/}(params["id"], backend)
-	if err != nil {
-		res.Error(err)
-		return
-	}
-
-	res.Ok(${1})
+	res.Automatic(${1}, err)
 }
 ]]></content>
 	<tabTrigger>swget</tabTrigger>

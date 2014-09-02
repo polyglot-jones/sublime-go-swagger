@@ -7,21 +7,16 @@
 // @Success 204 {object} string "No content"
 // @Failure 401 {object} error "Not authenticated"
 // @Failure 403 {object} error "Forbidden"
-// @Failure 404 {object} error "No such ID"
+// @Failure 404 {object} error "No such Id"
 // @Resource /${1}
-// @Router /${1}s [get]
+// @Router /${1} [get]
 func get${1/(.*)/\u\1/}s(mParams martini.Params, res server.Respond, backend ${1/(.*)/\u\1/}Backend) {
 	// Register this method in createServer() as follows:
-	// s.Get("/${1}s", get${1/(.*)/\u\1/}s)
+	// s.Get("/${1}", get${1/(.*)/\u\1/}s)
 
 	params := parseQuery(mParams)
 	${1}s, err := Get${1/(.*)/\u\1/}s(params, backend)
-	if err != nil {
-		res.Error(err)
-		return
-	}
-
-	res.Ok(${1}s)
+	res.Automatic(${1}, err)
 }
 ]]></content>
 	<tabTrigger>swgetall</tabTrigger>
