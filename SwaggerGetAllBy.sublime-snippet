@@ -4,7 +4,7 @@
 // @Title get${1/(.*)/\u\1/}sBy${2/(.*)/\u\1/}
 // @Description List of all ${1:resource}s of a certain ${2:target_resource}
 // @Param   ${2}Id path string true "${2/(.*)/\u\1/} Id"
-// @Success 200 {array} ${1/(.*)/\u\1/}
+// @Success 200 {object} ${1/(.*)/\u\1/}QueryResponse
 // @Success 204 {object} string "No content"
 // @Failure 401 {object} error "Not authenticated"
 // @Failure 403 {object} error "Forbidden"

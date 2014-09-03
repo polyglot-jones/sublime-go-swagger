@@ -3,12 +3,13 @@
 	<content><![CDATA[
 // @Title get${1/(.*)/\u\1/}
 // @Description Get a specific ${1:resource}
-// @Param   ${1}Id path string true "${1/(.*)/\u\1/} id"
+// @Param   ${1}Id path string true "${1/(.*)/\u\1/} Id"
 // @Success 200 {object} model.${1/(.*)/\u\1/}
 // @Failure 400 {object} error "Bad request"
 // @Failure 401 {object} error "Not authenticated"
 // @Failure 403 {object} error "Forbidden"
 // @Failure 404 {object} error "No such ${1} Id"
+// @Resource /${1}
 // @Router /${1}/{${1}Id} [get]
 func get${1/(.*)/\u\1/}(mParams martini.Params, res server.Respond, backend ${1/(.*)/\u\1/}Backend) {
 	// Register this method in createServer() as follows:

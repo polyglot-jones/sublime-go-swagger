@@ -4,6 +4,7 @@
 // @Title rpc${1/(.*)/\u\1/}
 // @Description Call the ${1:procname} remote procedure against the ${2:resource} resource.
 // @Accept  json
+// @Param   ${2/(.*)/\u\1/} json model.${2/(.*)/\u\1/} true "json body"
 // @Success 200 {object} string
 // @Success 204 {object} string "No content"
 // @Failure 400 {object} error "Bad request"

@@ -4,10 +4,12 @@
 // @Title create${1/(.*)/\u\1/}
 // @Description Create a ${1:resource}.
 // @Accept  application/json
-// @Success 200 {object} ${1/(.*)/\u\1/}
+// @Param   ${1/(.*)/\u\1/} json model.${1/(.*)/\u\1/} true "json body"
+// @Success 200 {object} model.${1/(.*)/\u\1/}
 // @Failure 400 {object} error "Bad request"
 // @Failure 401 {object} error "Not authenticated"
 // @Failure 403 {object} error "Forbidden"
+// @Resource /${1}
 // @Router /${1} [post]
 func create${1/(.*)/\u\1/}(req *http.Request, mParams martini.Params, res server.Respond, ${1} ${1/(.*)/\u\1/}, backend ${1/(.*)/\u\1/}Backend) {
 	// Register this method in createServer() as follows:
