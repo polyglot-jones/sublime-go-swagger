@@ -1,0 +1,52 @@
+<snippet>
+   <description>Fake source code initialization</description>
+	<content><![CDATA[
+package main
+
+import (
+	"encoding/json"
+	"log"
+	"net/http"
+	"strings"
+
+	jc "github.com/codisms/json-config"
+	"github.com/inspirent/mp-das/model"
+	server "github.com/inspirent/server-base"
+)
+
+// Stub implementation of the ${1/(.*)/\u\1/}Backend to provide dummy /${1:resource} data.
+
+// Fake${1/(.*)/\u\1/}Backend implements ${1/(.*)/\u\1/}Backend as a fake (i.e. a passive stub; as opposed to a mock, which is an active stub).
+// Fake${1/(.*)/\u\1/}Backend is used both for unit testing and for demo purposes.
+type Fake${1/(.*)/\u\1/}Backend struct {
+	applicationId *string
+	accessToken   *string
+	config        *jc.Config
+}
+
+type Fake${1/(.*)/\u\1/}BackendNotYet struct {
+	applicationId *string
+	accessToken   *string
+	config        *jc.Config
+}
+
+func NewFake${1/(.*)/\u\1/}Backend(applicationId string, accessToken string, config *jc.Config) ${1/(.*)/\u\1/}Backend {
+	backend := &Fake${1/(.*)/\u\1/}Backend{
+		applicationId: &applicationId,
+		accessToken:   &accessToken,
+		config:        config,
+	}
+	return backend
+}
+func NewFake${1/(.*)/\u\1/}BackendNotYet(applicationId string, accessToken string, config *jc.Config) ${1/(.*)/\u\1/}BackendNotYet {
+	backend := &Fake${1/(.*)/\u\1/}BackendNotYet{
+		applicationId: &applicationId,
+		accessToken:   &accessToken,
+		config:        config,
+	}
+	return backend
+}
+]]></content>
+	<tabTrigger>fakeheader</tabTrigger>
+	<scope>source.go</scope>
+</snippet>

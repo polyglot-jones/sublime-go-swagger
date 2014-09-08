@@ -1,8 +1,8 @@
 <snippet>
    <description>Put (Update) Service Worker</description>
 	<content><![CDATA[
-// Update${1/(.*)/\u\1/} is the delegate that actually updates (puts) a ${1:resource}
-func Update${1/(.*)/\u\1/}(${1} *${1/(.*)/\u\1/}, backend ${1/(.*)/\u\1/}Backend) error {
+// doUpdate${1/(.*)/\u\1/} is the delegate that actually updates (puts) a ${1:resource}
+func doUpdate${1/(.*)/\u\1/}(${1} *${1/(.*)/\u\1/}, backend ${1/(.*)/\u\1/}BackendNotYet) error {
 
 	return nil
 }

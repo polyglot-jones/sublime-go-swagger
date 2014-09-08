@@ -7,17 +7,16 @@
 // @Param   ${1}Id path string true "${1/(.*)/\u\1/} Id"
 // @Param   ${1/(.*)/\u\1/} json model.${1/(.*)/\u\1/} true "json body"
 // @Success 204 {object} string "No content"
-// @Failure 400 {object} error "Bad request"
+// @Failure 400 {object} error "Bad request (e.g. No such ${1} Id)"
 // @Failure 401 {object} error "Not authenticated"
 // @Failure 403 {object} error "Forbidden"
-// @Failure 404 {object} error "No such ${1} Id"
 // @Resource /${1}
 // @Router /${1}/{${1}Id} [put]
-func update${1/(.*)/\u\1/}(req *http.Request, mParams martini.Params, res server.Respond, ${1} ${1/(.*)/\u\1/}, backend ${1/(.*)/\u\1/}Backend) {
+func update${1/(.*)/\u\1/}(req *http.Request, mParams martini.Params, res server.Respond, ${1} ${1/(.*)/\u\1/}, backend ${1/(.*)/\u\1/}BackendNotYet) {
 	// Register this method in createServer() as follows:
-	// s.Put("/${1} /:${1}Id", server.Bind(models.${1/(.*)/\u\1/}{}), update${1/(.*)/\u\1/})
+	// s.Put("/${1}/:${1}Id", server.Bind(model.${1/(.*)/\u\1/}{}), update${1/(.*)/\u\1/})
 
-	err := Update${1/(.*)/\u\1/}(&${1}, backend)
+	err := doUpdate${1/(.*)/\u\1/}(&${1}, backend)
 	res.Automatic(nil, err)
 }
 ]]></content>

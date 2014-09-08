@@ -4,19 +4,20 @@
 // @Title get${1/(.*)/\u\1/}sBy${2/(.*)/\u\1/}
 // @Description List of all ${1:resource}s of a certain ${2:target_resource}
 // @Param   ${2}Id path string true "${2/(.*)/\u\1/} Id"
-// @Success 200 {object} ${1/(.*)/\u\1/}QueryResponse
-// @Success 204 {object} string "No content"
+// @Param   pageSize query string false "Limit the number of records per page"
+// @Param   page query string false "Which page to fetch"
+// @Success 200 {array} model.${1/(.*)/\u\1/}
+// @Failure 400 {object} error "Bad request (e.g. No such ${2} Id; Requested page out of range)"
 // @Failure 401 {object} error "Not authenticated"
 // @Failure 403 {object} error "Forbidden"
-// @Failure 404 {object} error "No such ${2} Id"
 // @Resource /${1}
 // @Router /${2}/{${2}Id}/${1} [get]
-func get${1/(.*)/\u\1/}sBy${2/(.*)/\u\1/}(mParams martini.Params, res server.Respond, backend ${1/(.*)/\u\1/}Backend) {
+func get${1/(.*)/\u\1/}sBy${2/(.*)/\u\1/}(mParams martini.Params, res server.Respond, backend ${1/(.*)/\u\1/}BackendNotYet) {
 	// Register this method in createServer() as follows:
 	// s.Get("/${2}/:${2}Id/${1}", get${1/(.*)/\u\1/}sBy${2/(.*)/\u\1/})
 
 	params := parseQuery(mParams)
-	${1}s, err := Get${1/(.*)/\u\1/}sBy${2/(.*)/\u\1/}(params, backend)
+	${1}s, err := doGet${1/(.*)/\u\1/}sBy${2/(.*)/\u\1/}(params, backend)
 	res.Automatic(${1}s, err)
 }
 ]]></content>

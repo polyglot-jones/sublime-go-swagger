@@ -1,0 +1,45 @@
+<snippet>
+   <description>Fake source code initialization</description>
+	<content><![CDATA[
+package main
+
+
+import (
+	// "code.google.com/p/gomock/gomock"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/suite"
+	"testing"
+
+	"github.com/inspirent/mp-das/model"
+)
+
+// Test suite for the ${1:resource} resource
+type ${1/(.*)/\u\1/}Suite struct {
+	suite.Suite
+	// ctrl   *gomock.Controller
+	params *Params
+}
+
+const (
+	test_APPLICATION_ID = "some-client"
+	test_ACCESS_TOKEN = "USERTOKEN001"
+	test_INITIAL_${1/(.*)/\U\1/}_NAME = "Before"
+	test_UPDATE_${1/(.*)/\U\1/}_NAME  = "After"
+)
+
+// The one testify function that launches our test suite
+func Test${1/(.*)/\u\1/}Suite(t *testing.T) {
+	suite.Run(t, new(${1/(.*)/\u\1/}Suite))
+}
+
+func (this *${1/(.*)/\u\1/}Suite) SetupAllSuite() {
+	loadConfig()
+
+	// this.ctrl = gomock.NewController(c)
+	// defer this.ctrl.Finish()
+}
+
+]]></content>
+	<tabTrigger>testheader</tabTrigger>
+	<scope>source.go</scope>
+</snippet>

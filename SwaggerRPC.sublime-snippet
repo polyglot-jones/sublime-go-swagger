@@ -7,17 +7,16 @@
 // @Param   ${2/(.*)/\u\1/} json model.${2/(.*)/\u\1/} true "json body"
 // @Success 200 {object} string
 // @Success 204 {object} string "No content"
-// @Failure 400 {object} error "Bad request"
+// @Failure 400 {object} error "Bad request (e.g. No such ID)"
 // @Failure 401 {object} error "Not authenticated"
 // @Failure 403 {object} error "Forbidden"
-// @Failure 404 {object} error "No such ID"
 // @Resource /${2}
 // @Router /rpc/${1} [post]
-func rpc${1/(.*)/\u\1/}(req *http.Request, params martini.Params, res server.Respond, ${1} ${1/(.*)/\u\1/}, backend ${1/(.*)/\u\1/}Backend) {
+func rpc${1/(.*)/\u\1/}(req *http.Request, params martini.Params, res server.Respond, ${1} ${1/(.*)/\u\1/}, backend ${1/(.*)/\u\1/}BackendNotYet) {
 	// Register this method in createServer() as follows:
-	// s.Post("/rpc/${1}", server.Bind(${2/(.*)/\u\1/}{}), rpc${1/(.*)/\u\1/})
+	// s.Post("/rpc/${1}", server.Bind(model.${2/(.*)/\u\1/}{}), rpc${1/(.*)/\u\1/})
 
-	err := Rpc${1/(.*)/\u\1/}(&${1}, backend)
+	err := doRpc${1/(.*)/\u\1/}(&${1}, backend)
 	res.Automatic(nil, err)
 }
 ]]></content>

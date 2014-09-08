@@ -1,0 +1,83 @@
+<snippet>
+   <description>Fake backend for CRUD functions</description>
+	<content><![CDATA[
+
+// Dummy data for GET /${1:resource}/{${1}Id} and GET /${1:resource}
+const (
+	fake_${1/(.*)/\U\1/}_JSON_1 = `{"Id":"0000000001","Description":"${1/(.*)/\u\1/} number one."}`
+	fake_${1/(.*)/\U\1/}_JSON_2 = `{"Id":"0000000002","Description":"${1/(.*)/\u\1/} number two."}`
+	fake_${1/(.*)/\U\1/}_JSON_LIST = `[{"Id":"0000000001","Description":"${1/(.*)/\u\1/} number one."},{"Id":"0000000002","Description":"${1/(.*)/\u\1/} number two."}]`
+)
+
+func (this Fake${1/(.*)/\u\1/}BackendNotYet) Get${1/(.*)/\u\1/}(${1}Id string) (*model.${1/(.*)/\u\1/}, error) {
+	var err error
+	${1} := fake${1/(.*)/\u\1/}(${1}Id)
+	if ${1} == nil {
+		err = server.Errorf(http.StatusBadRequest, "No such ${1/(.*)/\u\1/} Id.")
+	}
+	return ${1}, err
+}
+
+func (this Fake${1/(.*)/\u\1/}BackendNotYet) Get${1/(.*)/\u\1/}s() ([]*model.${1/(.*)/\u\1/}, error) {
+	return fake${1/(.*)/\u\1/}List(), nil
+}
+
+func (this Fake${1/(.*)/\u\1/}BackendNotYet) Create${1/(.*)/\u\1/}(requested${1/(.*)/\u\1/} *model.${1/(.*)/\u\1/}) (*model.${1/(.*)/\u\1/}, error) {
+	if requested${1/(.*)/\u\1/}.Name == nil {
+		return nil, server.Errorf(http.StatusBadRequest, "Invalid request.")
+	} else if strings.Contains(*requested${1/(.*)/\u\1/}.Name, "News") {
+		return fake${1/(.*)/\u\1/}(1), nil
+	} else if strings.Contains(*requested${1/(.*)/\u\1/}.Name, "Nightline") {
+		return fake${1/(.*)/\u\1/}(2), nil
+	} else {
+		return nil, server.Errorf(http.StatusBadRequest, "Invalid request.")
+	}
+}
+
+func (this Fake${1/(.*)/\u\1/}BackendNotYet) Update${1/(.*)/\u\1/}(${1}Id string, ${1} *model.${1/(.*)/\u\1/}) error {
+	if ${1}Id == "0000000001" || ${1}Id == "0000000002" {
+		return nil
+	}
+	return server.Errorf(http.StatusBadRequest, "No such ${1/(.*)/\u\1/} Id.")
+}
+
+func (this Fake${1/(.*)/\u\1/}BackendNotYet) Delete${1/(.*)/\u\1/}(${1}Id string) error {
+	if ${1}Id == "0000000001" || ${1}Id == "0000000002" {
+		return nil
+	}
+	return server.Errorf(http.StatusBadRequest, "No such ${1/(.*)/\u\1/} Id.")
+}
+
+
+func fake${1/(.*)/\u\1/}(id string) *model.${1/(.*)/\u\1/} {
+	var ${1}Json []byte
+	switch id {
+	case "0000000001":
+		${1}Json = []byte(fake_${1/(.*)/\U\1/}_JSON_1)
+	case "0000000002":
+		${1}Json = []byte(fake_${1/(.*)/\U\1/}_JSON_2)
+	default:
+		${1}Json = []byte(`{}`)
+	}
+	var ${1} model.${1/(.*)/\u\1/}
+	err := json.Unmarshal(${1}Json, &${1})
+	if err != nil {
+		log.Fatalf("%#v", err)
+	}
+	return &${1}
+}
+
+func fake${1/(.*)/\u\1/}List() []*model.${1/(.*)/\u\1/} {
+	${1}ListJson := []byte(fake_${1/(.*)/\U\1/}_JSON_LIST)
+	var ${1}List []*model.${1/(.*)/\u\1/}
+	err := json.Unmarshal(${1}ListJson, &${1}List)
+	if err != nil {
+		log.Fatalf("%#v", err)
+	}
+	return ${1}List
+}
+
+]]></content>
+	<tabTrigger>fakecrud</tabTrigger>
+	<scope>source.go</scope>
+</snippet>

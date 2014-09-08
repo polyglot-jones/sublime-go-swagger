@@ -1,0 +1,102 @@
+<snippet>
+   <description>Fake backend for CRUD functions</description>
+	<content><![CDATA[
+
+/*****************************************************************************
+* Standard unit tests for the ${1:resource} CRUD
+*****************************************************************************/
+
+func (this *${1/(.*)/\u\1/}Suite) Test${1/(.*)/\u\1/}_Get_MissingId() {
+	backend := NewFake${1/(.*)/\u\1/}BackendNotYet(test_APPLICATION_ID, test_ACCESS_TOKEN, config)
+
+	this.params = &Params{}
+
+	_, err := doGet${1/(.*)/\u\1/}(this.params, backend)
+	assert.EqualError(this.T(), err, "${1/(.*)/\u\1/} Id is blank.")
+}
+
+func (this *${1/(.*)/\u\1/}Suite) Test${1/(.*)/\u\1/}_Get_NoSuchId() {
+	backend := NewFake${1/(.*)/\u\1/}BackendNotYet(test_APPLICATION_ID, test_ACCESS_TOKEN, config)
+
+	this.params = &Params{
+		${1/(.*)/\u\1/}Id: "NOSUCH",
+	}
+	_, err := doGet${1/(.*)/\u\1/}(this.params, backend)
+	assert.EqualError(this.T(), err, "No such ${1/(.*)/\u\1/} Id.")
+}
+
+func (this *${1/(.*)/\u\1/}Suite) Test${1/(.*)/\u\1/}_Get() {
+	backend := NewFake${1/(.*)/\u\1/}BackendNotYet(test_APPLICATION_ID, test_ACCESS_TOKEN, config)
+
+	${1}List, err := doGet${1/(.*)/\u\1/}s(backend)
+	assert.NotNil(this.T(), ${1}List)
+	assert.True(this.T(), len(${1}List) > 0)
+}
+
+func (this *${1/(.*)/\u\1/}Suite) Test${1/(.*)/\u\1/}_Create_ObjectNotSupposedToBeEmpty() {
+	backend := NewFake${1/(.*)/\u\1/}BackendNotYet(test_APPLICATION_ID, test_ACCESS_TOKEN, config)
+
+	_, err := doCreate${1/(.*)/\u\1/}(nil, backend)
+	assert.EqualError(this.T(), err, "${1/(.*)/\u\1/} object is empty.")
+}
+func (this *${1/(.*)/\u\1/}Suite) Test${1/(.*)/\u\1/}_Create_IdNotSupposedToBeSupplied() {
+	backend := NewFake${1/(.*)/\u\1/}BackendNotYet(test_APPLICATION_ID, test_ACCESS_TOKEN, config)
+
+	${1} := build${1/(.*)/\u\1/}()
+	extraneousId := "0000000001"
+	${1}.Id = &extraneousId
+
+	_, err := doCreate${1/(.*)/\u\1/}(${1}, backend)
+	assert.EqualError(this.T(), err, "${1/(.*)/\u\1/} Id is not valid on create.")
+}
+func (this *${1/(.*)/\u\1/}Suite) Test${1/(.*)/\u\1/}_Create() {
+	backend := NewFake${1/(.*)/\u\1/}BackendNotYet(test_APPLICATION_ID, test_ACCESS_TOKEN, config)
+
+	this.params = &Params{}
+
+	${1} := build${1/(.*)/\u\1/}()
+
+	new${1/(.*)/\u\1/}, err := doCreate${1/(.*)/\u\1/}(${1}, backend)
+	assertNoServerError(this.T(), err)
+	assert.NotNil(this.T(), new${1/(.*)/\u\1/}.Id, "Created ${1/(.*)/\u\1/} Id is not supposed to be blank %+v\n", new${1/(.*)/\u\1/}.Id)
+	assert.Equal(this.T(), *new${1/(.*)/\u\1/}.Id, "0000000001")
+}
+func (this *${1/(.*)/\u\1/}Suite) Test${1/(.*)/\u\1/}_Update_ObjectNotSupposedToBeEmpty() {
+	backend := NewFake${1/(.*)/\u\1/}BackendNotYet(test_APPLICATION_ID, test_ACCESS_TOKEN, config)
+
+	this.params = &Params{
+		${1/(.*)/\u\1/}Id: "0000000001",
+	}
+
+	err := doUpdate${1/(.*)/\u\1/}(this.params, nil, backend)
+	assert.EqualError(this.T(), err, "${1/(.*)/\u\1/} object is empty.")
+}
+
+func (this *${1/(.*)/\u\1/}Suite) Test${1/(.*)/\u\1/}_Delete_MissingId() {
+	backend := NewFake${1/(.*)/\u\1/}BackendNotYet(test_APPLICATION_ID, test_ACCESS_TOKEN, config)
+
+	this.params = &Params{}
+
+	err := doDelete${1/(.*)/\u\1/}(this.params, backend)
+	assert.EqualError(this.T(), err, "${1/(.*)/\u\1/} Id is blank.")
+}
+func (this *${1/(.*)/\u\1/}Suite) Test${1/(.*)/\u\1/}_Delete_NoSuchId() {
+	backend := NewFake${1/(.*)/\u\1/}BackendNotYet(test_APPLICATION_ID, test_ACCESS_TOKEN, config)
+
+	this.params = &Params{
+		${1/(.*)/\u\1/}Id: "NOSUCH",
+	}
+	err := doDelete${1/(.*)/\u\1/}(this.params, backend)
+	assert.EqualError(this.T(), err, "No such ${1/(.*)/\u\1/} Id.")
+}
+
+/*****************************************************************************
+* Additional unit tests for the ${1:resource} CRUD
+*****************************************************************************/
+
+// TODO add test for special conditions/combinations here
+
+]]></content>
+	<tabTrigger>testcrud</tabTrigger>
+	<scope>source.go</scope>
+</snippet>

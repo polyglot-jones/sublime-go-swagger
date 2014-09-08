@@ -1,0 +1,12 @@
+<snippet>
+   <description>Get-Picklist (unpaged) Service Worker</description>
+	<content><![CDATA[
+// doGet${1/(.*)/\u\1/}s is the delegate that actually gets a list of all ${1:resource}s (unit testable)
+func doGet${1/(.*)/\u\1/}s(params *Params, backend ${1/(.*)/\u\1/}BackendNotYet) ([]*${1/(.*)/\u\1/}, error) {
+	return backend.Get${1/(.*)/\u\1/}s(params)
+}
+
+]]></content>
+	<tabTrigger>dogetpicklist</tabTrigger>
+	<scope>source.go</scope>
+</snippet>

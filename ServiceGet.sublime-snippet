@@ -1,8 +1,8 @@
 <snippet>
    <description>Get-Details Service Worker</description>
 	<content><![CDATA[
-// Get${1/(.*)/\u\1/} is the delegate that actually gets a specific ${1:resource}
-func Get${1/(.*)/\u\1/}(params, backend ${1/(.*)/\u\1/}Backend)(*${1/(.*)/\u\1/}QueryResponse, error) {
+// doGet${1/(.*)/\u\1/} is the delegate that actually gets a specific ${1:resource}
+func doGet${1/(.*)/\u\1/}(params, backend ${1/(.*)/\u\1/}BackendNotYet)(*${1/(.*)/\u\1/}QueryResponse, error) {
 
 	${1} := nil
 

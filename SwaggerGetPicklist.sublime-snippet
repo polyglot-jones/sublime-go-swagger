@@ -1,12 +1,10 @@
 <snippet>
-   <description>Get-All Controller with Swagger Annotations</description>
+   <description>Get-Picklist (unpaged) Controller with Swagger Annotations</description>
 	<content><![CDATA[
 // @Title get${1/(.*)/\u\1/}s
 // @Description List of all ${1:resource}s
-// @Param   pageSize query string false "Limit the number of records per page"
-// @Param   page query string false "Which page to fetch"
-// @Success 200 {array} model.${1/(.*)/\u\1/}
-// @Failure 400 {object} error "Bad request (e.g. requested page out of range)"
+// @Success 200 {array} model.${1/(.*)/\u\1/} "A complete json array (no paging)"
+// @Failure 400 {object} error "Bad request"
 // @Failure 401 {object} error "Not authenticated"
 // @Failure 403 {object} error "Forbidden"
 // @Resource /${1}
@@ -19,6 +17,7 @@ func get${1/(.*)/\u\1/}s(mParams martini.Params, res server.Respond, backend ${1
 	${1}s, err := doGet${1/(.*)/\u\1/}s(params, backend)
 	res.Automatic(${1}s, err)
 }
+
 ]]></content>
 	<tabTrigger>swgetall</tabTrigger>
 	<scope>source.go</scope>

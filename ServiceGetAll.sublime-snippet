@@ -1,25 +1,27 @@
 <snippet>
    <description>Get-All Service Worker</description>
 	<content><![CDATA[
-// Get${1/(.*)/\u\1/}s is the delegate that actually gets a list of all ${1:resource}s
-func Get${1/(.*)/\u\1/}s(params *Params, backend ${1/(.*)/\u\1/}Backend) (*${1/(.*)/\u\1/}QueryResponse, error) {
-
-	// Temporary stub
-	${1}1 := nil
-	${1}2 := nil
-	${1}s := &${1/(.*)/\u\1/}QueryResponse{
-		TotalRecords: 2,
-		Records:      []*${1/(.*)/\u\1/}{${1}1, ${1}2},
+// doGet${1/(.*)/\u\1/}s is the delegate that actually gets a list of all ${1:resource}s
+func doGet${1/(.*)/\u\1/}s(params *Params, backend ${1/(.*)/\u\1/}BackendNotYet) (*${1/(.*)/\u\1/}Response, error) {
+	${1}Records, err := backend.Get${1/(.*)/\u\1/}s(params)
+	if err != nil {
+	    return nil, err
 	}
 
-	// Actual call to backend
-	// ${1}s, err := backend.Get${1/(.*)/\u\1/}s(params)
-	// if err != nil {
-	//     return nil, err
-	// }
-
+	// TODO This is temporary until the DAS returns the actual paging information
+	${1}s := &${1/(.*)/\u\1/}Response{
+		StandardPageData: StandardPageData{
+			PageSize:     len(${1}Records),
+			Page:         1,
+			Offset:       0,
+			TotalRecords: len(${1}Records),
+			MaxPage:      1,
+		},
+		Records:      ${1}Records,
+	}
 	return ${1}s, nil
 }
+
 ]]></content>
 	<tabTrigger>svcgetall</tabTrigger>
 	<scope>source.go</scope>

@@ -11,11 +11,11 @@
 // @Failure 403 {object} error "Forbidden"
 // @Resource /${1}
 // @Router /${1} [post]
-func create${1/(.*)/\u\1/}(req *http.Request, mParams martini.Params, res server.Respond, ${1} ${1/(.*)/\u\1/}, backend ${1/(.*)/\u\1/}Backend) {
+func create${1/(.*)/\u\1/}(req *http.Request, mParams martini.Params, res server.Respond, ${1} ${1/(.*)/\u\1/}, backend ${1/(.*)/\u\1/}BackendNotYet) {
 	// Register this method in createServer() as follows:
-	// s.Post("/${1}", server.Bind(${1/(.*)/\u\1/}{}), create${1/(.*)/\u\1/})
+	// s.Post("/${1}", server.Bind(model.${1/(.*)/\u\1/}{}), create${1/(.*)/\u\1/})
 
-	err := Create${1/(.*)/\u\1/}(&${1}, backend)
+	err := doCreate${1/(.*)/\u\1/}(&${1}, backend)
 	res.Automatic(nil, err)
 }
 ]]></content>

@@ -1,0 +1,36 @@
+<snippet>
+   <description>Delete Service Worker</description>
+	<content><![CDATA[
+package main
+
+import (
+	"github.com/inspirent/mp-das/model"
+)
+
+// TODO Move the ${1:resource} CRUD methods from the NotYet interface to the regular interface as they become available in the DAS
+type ${1/(.*)/\u\1/}Backend interface {
+}
+type ${1/(.*)/\u\1/}BackendNotYet interface {
+	Get${1/(.*)/\u\1/}(${1}Id string) (*model.${1/(.*)/\u\1/}, error)
+	Get${1/(.*)/\u\1/}s() ([]*model.${1/(.*)/\u\1/}, error)
+	Create${1/(.*)/\u\1/}(${1} *model.${1/(.*)/\u\1/}) (*model.${1/(.*)/\u\1/}, error)
+	Update${1/(.*)/\u\1/}(${1}Id string, ${1} *model.${1/(.*)/\u\1/}) error
+	Delete${1/(.*)/\u\1/}(${1}Id string) error
+}
+
+// TODO This is the beginnings of a data model for the ${1} resource
+// TODO Move to mp-das/model/model_interface.go
+type ${1/(.*)/\u\1/} struct {
+	Id          *string `json:"id,omitempty"`
+	Description *string `json:"description,omitempty"`
+}
+
+type ${1/(.*)/\u\1/}Response struct {
+	model.StandardPageData
+	Records []*${1/(.*)/\u\1/} `json:"records"`
+}
+
+]]></content>
+	<tabTrigger>svcheader</tabTrigger>
+	<scope>source.go</scope>
+</snippet>
