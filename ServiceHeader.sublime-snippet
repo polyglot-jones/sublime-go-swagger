@@ -4,7 +4,6 @@
 package main
 
 import (
-	"github.com/inspirent/mp-das/model"
 )
 
 // TODO Move the ${1:resource} CRUD methods from the NotYet interface to the regular interface as they become available in the DAS

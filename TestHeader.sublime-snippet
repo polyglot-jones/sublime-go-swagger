@@ -9,8 +9,6 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"testing"
-
-	"github.com/inspirent/mp-das/model"
 )
 
 // Test suite for the ${1:resource} resource

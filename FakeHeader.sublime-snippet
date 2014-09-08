@@ -10,8 +10,6 @@ import (
 	"strings"
 
 	jc "github.com/codisms/json-config"
-	"github.com/inspirent/mp-das/model"
-	server "github.com/inspirent/server-base"
 )
 
 // Stub implementation of the ${1/(.*)/\u\1/}Backend to provide dummy /${1:resource} data.
